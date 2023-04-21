@@ -50,10 +50,6 @@ export const Register = () => {
             return;
         }
 
-        let options = {year: 'numeric', month: 'long', day: 'numeric' };
-        
-        // console.log(birthday.toLocaleDateString('es-ES', options));
-
         startRegister({
             name: registerName,
             lastName: registerLastName,

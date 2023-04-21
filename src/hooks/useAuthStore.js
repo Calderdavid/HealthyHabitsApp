@@ -47,12 +47,21 @@ export const useAuthStore = () => {
         } = user;
 
         dispatch( onChecking() );
+        
+        let options = {year: 'numeric', month: 'long', day: 'numeric' };
 
+        const formatDate = birthday.toLocaleDateString('es-ES', options);
 
+        console.log(formatDate)
 
         try {
             const {data} = await healthyApi.post('/usuarios',{
                 nombre: name,
+                apellido: lastName,
+                genero: gender,
+                fecha_nacimiento: formatDate,
+                altura: high,
+                peso: weight,
                 correo: email,
                 password: password,
                 rol: rol
