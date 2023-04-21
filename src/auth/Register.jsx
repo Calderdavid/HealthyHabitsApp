@@ -7,6 +7,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { useForm } from '../hooks/useForm'
 import { useAuthStore } from '../hooks/useAuthStore';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 
 const RegisterFormFields = {
@@ -227,7 +228,7 @@ export const Register = () => {
                     />
                 </div>
                 
-                <div className="w-full md:w-5 flex justify-content-center mb-3 mx-auto">
+                <div className="w-full md:w-5 flex justify-content-center mx-auto">
                     <button 
                         type="submit" 
                         className="button-28 text-xl font-bold w-auto" 
@@ -236,6 +237,9 @@ export const Register = () => {
                         Registrarse
                     </button>
                 </div>
+                <span className="account flex justify-content-center mx-auto w-7 flex mb-2 font-light text-base">
+                        <Link to="/auth/login" style={{color:"black"}}>Ya tengo cuenta en <b>Healthy Habits</b></Link>
+                </span>
             </form>
         
         
