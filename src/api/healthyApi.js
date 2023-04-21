@@ -5,7 +5,7 @@ const { VITE_API_URL } = getEnvVariables();
 
 const healthyApi = axios.create({
     baseURL: VITE_API_URL
-    
+    // baseURL: import.meta.env.VITE_API_URL
 })
 
 

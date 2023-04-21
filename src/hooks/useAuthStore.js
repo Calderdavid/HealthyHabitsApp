@@ -52,8 +52,6 @@ export const useAuthStore = () => {
 
         const formatDate = birthday.toLocaleDateString('es-ES', options);
 
-        console.log(formatDate)
-
         try {
             const {data} = await healthyApi.post('/usuarios',{
                 nombre: name,
@@ -87,13 +85,15 @@ export const useAuthStore = () => {
         if ( !token ) return dispatch(onLogout());
 
         try {
-            const {data} = await healthyApi.get('auth/renew');
+            const {data} = await healthyApi.get('/auth/renew');
+
             localStorage.setItem('token', data.token);
             localStorage.setItem('token-init-date', new Date().getTime());
 
-            dispatch( onLogin({name: data.usuario.nombre, uid: data.usuario.uid}) );
+            dispatch( onLogin({name: data.nombre, uid: data.token}) );
 
         } catch (err) {
+            console.log(err)
             localStorage.clear();
             dispatch(onLogout());
         }

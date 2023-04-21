@@ -43,8 +43,24 @@ export const Register = () => {
         onInputChange 
     } = useForm(RegisterFormFields);
 
+    const getEdad = (dateString) => {
+        let hoy = new Date()
+        let fechaNacimiento = new Date(dateString)
+        let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
+        let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
+        if (
+          diferenciaMeses < 0 ||
+          (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
+        ) {
+          edad--
+        }
+        return edad
+    }
+
     const registerSubmit = (event) => {
         event.preventDefault();
+
+        const edad = getEdad(birthday); //return edad (valor entero)
 
         if( registerPassword !== registerPassword2) {
             Swal.fire('Error en el registro', 'Las contraseñas no coinciden', 'error');
