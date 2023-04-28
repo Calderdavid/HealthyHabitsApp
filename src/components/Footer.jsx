@@ -8,7 +8,7 @@ export const Footer = () => {
         <div 
             className="container flex flex-row justify-content-around align-items-center"
             style={{
-                backgroundColor: "#f1f2f6"
+                backgroundColor: "#f1f2f6",
             }}
         >
             

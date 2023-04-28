@@ -37,7 +37,13 @@ export const Content = () => {
 
         </div>
 
-        <div className="container flex flex-row justify-content-around align-items-center">
+        <div 
+            className="container flex flex-row justify-content-around align-items-center"
+            style={{
+                boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)"
+            }}
+        
+        >
 
             <div className="mx-6 my-4">
                     
@@ -64,7 +70,12 @@ export const Content = () => {
 
         </div>
 
-        <div className="container flex flex-row justify-content-around align-items-center">
+        <div 
+            className="container flex flex-row justify-content-around align-items-center"
+            style={{
+                boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)"
+            }}
+        >
 
             <div className="img mx-6 my-4">
                     <img 
@@ -74,7 +85,7 @@ export const Content = () => {
                             height: '80vh',
                             borderRadius: "10px",
                             boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)"
-                            }}
+                        }}
                     ></img>
             </div>
 

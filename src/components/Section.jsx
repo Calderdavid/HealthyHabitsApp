@@ -1,6 +1,8 @@
 import React from 'react'
 import img3 from '../assets/img88.jpg'
+import { Link } from 'react-router-dom'
         
+
 
 export const Section = () => {
   return (
@@ -21,7 +23,7 @@ export const Section = () => {
 
                 </h1>
                 
-                <button className="button-28 text-3xl font-bold mt-3" role="button">Empezar</button>
+                <Link to="/evaluation"><button className="button-28 text-3xl font-bold mt-3" role="button">Empezar</button></Link>
                 <span className="account flex mt-2 font-light text-base"><a href="#" style={{color:"black"}}>¿Ya conoces <b>Healthy Habits</b>?</a></span>
             </div>
 

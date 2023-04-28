@@ -4,6 +4,7 @@ import { Login } from '../auth/Login'
 import { Register } from '../auth/Register'
 import { HomePage } from '../HealthyHabits/HomePage'
 import { useAuthStore } from '../hooks/useAuthStore'
+import { Evaluation } from '../HealthyHabits/Evaluation'
 
 
 export const AppRouter = () => {
@@ -45,6 +46,7 @@ export const AppRouter = () => {
                     : (
                         <>
                             <Route path="/" element={<HomePage/>} />
+                            <Route path="/evaluation" element={<Evaluation/>} />
                             <Route path="/*" element={<Navigate to="/" />} />
                         </>
                     )

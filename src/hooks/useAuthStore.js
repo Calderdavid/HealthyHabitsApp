@@ -66,7 +66,6 @@ export const useAuthStore = () => {
             });
             localStorage.setItem('token', data.token);
             localStorage.setItem('token-init-date', new Date().getTime());
-
             dispatch( onLogin({name: data.usuario.nombre, uid: data.usuario.uid}) );
 
         }catch (err) {
@@ -86,7 +85,6 @@ export const useAuthStore = () => {
 
         try {
             const {data} = await healthyApi.get('/auth/renew');
-
             localStorage.setItem('token', data.token);
             localStorage.setItem('token-init-date', new Date().getTime());
 

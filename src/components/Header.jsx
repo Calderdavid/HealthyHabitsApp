@@ -13,8 +13,8 @@ export const Header = () => {
         <div 
           className="container flex justify-content-between"
           style={{
-          backgroundColor: '#FFFFFF',
-          boxShadow: "0 10px 6px -6px #777"
+            backgroundColor: '#FFFFFF',
+            boxShadow: "0 10px 6px -6px #777"
           }}
         >
           <h4 
