@@ -5,6 +5,7 @@ import { Register } from '../auth/Register'
 import { HomePage } from '../HealthyHabits/HomePage'
 import { useAuthStore } from '../hooks/useAuthStore'
 import { Evaluation } from '../HealthyHabits/Evaluation'
+import { OpenAI } from '../api/openAI'
 
 
 export const AppRouter = () => {
@@ -47,6 +48,7 @@ export const AppRouter = () => {
                         <>
                             <Route path="/" element={<HomePage/>} />
                             <Route path="/evaluation" element={<Evaluation/>} />
+                            <Route path="/api" element={<OpenAI/>} />
                             <Route path="/*" element={<Navigate to="/" />} />
                         </>
                     )
