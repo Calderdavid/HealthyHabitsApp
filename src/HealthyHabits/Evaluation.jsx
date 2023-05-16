@@ -3,8 +3,8 @@ import { Navbar } from '../components/Navbar'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import healthyApi from '../api/healthyApi';
-
-
+import { useAuthStore } from '../hooks/useAuthStore';
+import { useSelector } from 'react-redux';
 
 const goals = {
     objetivo1: "Perder peso",
@@ -78,22 +78,50 @@ export const Evaluation = () => {
 
     // console.log(list)
 
+    //request openai api
     const [prompt, setPrompt] = useState("Que es Youtube en español");
     const [response, setResponse] = useState("");
 
+    // const { user } = useAuthStore();
+    const { user } = useSelector(state => state.auth)
 
-    
+    console.log(user)
+
+    // const requestUser = async(_id) => {
+
+    //     await healthyApi.get(`/usuarios?${_id}`, { id })
+    //         .then((res) => {
+    //             console.log(res.data)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    // }
+
+    // requestUser(user.uid)
+
+    const customMessage = `
+        Soy ${user.genero}, nací el ${user.fecha_nacimiento}. 
+        Actualmente peso ${user.peso} kg y mido ${user.altura} cm.
+        Que me recomiendas si tengo como objetivo
+    `
+
+    console.log(customMessage)
+
     const handleSubmit = async(e) => {
         e.preventDefault();
 
         await healthyApi.post('/chat', { prompt })
-            .then((res) => setResponse(res.data))
+            .then((res) => {
+                setResponse(res.data);
+            })
             .catch((error) => {
                 console.log(error);
             });
-
-
     }
+
+
+
 
     return (
         <>

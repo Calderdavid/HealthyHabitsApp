@@ -66,7 +66,13 @@ export const useAuthStore = () => {
             });
             localStorage.setItem('token', data.token);
             localStorage.setItem('token-init-date', new Date().getTime());
-            dispatch( onLogin({name: data.usuario.nombre, uid: data.usuario.uid}) );
+            dispatch( onLogin({
+                name: data.usuario.nombre, uid: data.usuario.uid,
+                genero: gender,
+                fecha_nacimiento: formatDate,
+                altura: high,
+                peso: weight,
+            }));
 
         }catch (err) {
             dispatch(onLogout(err.response.data?.msg || '--'))
