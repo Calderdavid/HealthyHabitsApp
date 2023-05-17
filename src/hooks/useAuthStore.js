@@ -20,7 +20,18 @@ export const useAuthStore = () => {
             localStorage.setItem('token', data.token);
             localStorage.setItem('token-init-date', new Date().getTime());
 
-            dispatch( onLogin({name: data.usuario.nombre, uid: data.usuario.uid}) );
+            dispatch( onLogin(
+                {
+                    nombre: data.usuario.nombre, 
+                    // uid: data.usuario.uid, 
+                    id: data.usuario.uid, 
+                    correo: data.usuario.correo, 
+                    fecha_nacimiento: data.usuario.fecha_nacimiento,
+                    genero: data.usuario.genero,
+                    altura: data.usuario.altura, 
+                    peso: data.usuario.peso
+                }
+            ));
 
         }catch (err) {
             dispatch(onLogout('Credenciales Incorrectas'))
@@ -66,8 +77,12 @@ export const useAuthStore = () => {
             });
             localStorage.setItem('token', data.token);
             localStorage.setItem('token-init-date', new Date().getTime());
+
+            // console.log(data)
             dispatch( onLogin({
-                name: data.usuario.nombre, uid: data.usuario.uid,
+                nombre: data.usuario.nombre, 
+                // uid: data.usuario.uid,
+                id: data.usuario.uid,
                 genero: gender,
                 fecha_nacimiento: formatDate,
                 altura: high,
@@ -94,7 +109,19 @@ export const useAuthStore = () => {
             localStorage.setItem('token', data.token);
             localStorage.setItem('token-init-date', new Date().getTime());
 
-            dispatch( onLogin({name: data.nombre, uid: data.token}) );
+            // console.log(data)
+            dispatch( onLogin(
+                {
+                    nombre: data.nombre, 
+                    uid: data.token, 
+                    id: data.id, 
+                    correo: data.correo,
+                    genero: data.genero,
+                    fecha_nacimiento: data.fecha_nacimiento,
+                    altura: data.altura,
+                    peso: data.peso
+                }
+            ));
 
         } catch (err) {
             console.log(err)

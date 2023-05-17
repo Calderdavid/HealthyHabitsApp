@@ -23,7 +23,7 @@ export const Header = () => {
                 color:'black',
             }}
           >
-              {user.name}
+              {user.nombre}
           </h4>
           
 

@@ -17,7 +17,16 @@ const goals = {
 
 export const Evaluation = () => {
     
+    //almacena la lista de objetivos seleccionados
     const [list, setList] = useState([])
+    
+    //configura el prompt para hacer la petición a la api de openai
+    const [prompt, setPrompt] = useState("");
+    const [response, setResponse] = useState("");
+    
+    //Informacion del usuario autenticado
+    const { user } = useAuthStore();
+
     
     const [goal1, setGoal1] = useState({
         id: 1,
@@ -50,6 +59,7 @@ export const Evaluation = () => {
         estado: false
     });
 
+    //Controla la cantidad de elementos seleccionados (3)
     const [count, setCount] = useState(0);
 
 
@@ -75,53 +85,51 @@ export const Evaluation = () => {
         })
         setList(newList);
     }
-
-    // console.log(list)
-
-    //request openai api
-    const [prompt, setPrompt] = useState("Que es Youtube en español");
-    const [response, setResponse] = useState("");
-
-    // const { user } = useAuthStore();
-    const { user } = useSelector(state => state.auth)
-
-    console.log(user)
-
-    // const requestUser = async(_id) => {
-
-    //     await healthyApi.get(`/usuarios?${_id}`, { id })
+    
+    // const requestUser = async(id) => {
+        
+    //     await healthyApi.get("/usuarios")
     //         .then((res) => {
-    //             console.log(res.data)
+    //             // console.log(res)
+    //             //se obtiene toda la info del usuario
+    //             let filteredList = res.data.usuarios.filter(user => user.uid === id );
     //         })
     //         .catch((err) => {
     //             console.log(err)
     //         })
     // }
-
-    // requestUser(user.uid)
-
-    const customMessage = `
-        Soy ${user.genero}, nací el ${user.fecha_nacimiento}. 
-        Actualmente peso ${user.peso} kg y mido ${user.altura} cm.
-        Que me recomiendas si tengo como objetivo
-    `
-
-    console.log(customMessage)
-
+                
+    // requestUser(id)
+    
+                
     const handleSubmit = async(e) => {
         e.preventDefault();
-
+        
         await healthyApi.post('/chat', { prompt })
             .then((res) => {
                 setResponse(res.data);
+                
+                let customMessage = `
+                    Soy ${user.genero}, nací el ${user.fecha_nacimiento}. 
+                    Actualmente peso ${user.peso} kg y mido ${user.altura} cm.
+                    Que me recomiendas si tengo como objetivo ${list[0].obj}
+                `
+
+                setPrompt(customMessage);
             })
             .catch((error) => {
                 console.log(error);
             });
     }
 
+    // let customMessage = `
+    //     Soy ${user.genero}, nací el ${user.fecha_nacimiento}. 
+    //     Actualmente peso ${user.peso} kg y mido ${user.altura} cm.
+    //     Que me recomiendas si tengo como objetivo
+    // `
 
-
+    // console.log(customMessage);
+    // console.log(list)
 
     return (
         <>
