@@ -6,6 +6,13 @@ import { HomePage } from '../HealthyHabits/HomePage'
 import { useAuthStore } from '../hooks/useAuthStore'
 import { Evaluation } from '../HealthyHabits/Evaluation'
 import { OpenAI } from '../api/openAI'
+import { EvaluationObj1 } from '../HealthyHabits/EvaluationObj1'
+import { EvaluationObj2 } from '../HealthyHabits/EvaluationObj2'
+import { EvaluationObj3 } from '../HealthyHabits/EvaluationObj3'
+import { EvaluationObj4 } from '../HealthyHabits/EvaluationObj4'
+import { EvaluationObj5 } from '../HealthyHabits/EvaluationObj5'
+import { EvaluationObj6 } from '../HealthyHabits/EvaluationObj6'
+import { Completed } from '../HealthyHabits/Completed'
 
 
 export const AppRouter = () => {
@@ -48,6 +55,7 @@ export const AppRouter = () => {
                         <>
                             <Route path="/" element={<HomePage/>} />
                             <Route path="/evaluation" element={<Evaluation/>} />
+                            <Route path="/completed" element={<Completed />} />
                             <Route path="/api" element={<OpenAI/>} />
                             <Route path="/*" element={<Navigate to="/" />} />
                         </>

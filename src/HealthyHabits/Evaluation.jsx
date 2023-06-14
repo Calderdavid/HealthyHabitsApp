@@ -4,7 +4,16 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import healthyApi from '../api/healthyApi';
 import { useAuthStore } from '../hooks/useAuthStore';
-import { useSelector } from 'react-redux';
+import { EvaluationObj1 } from './EvaluationObj1';
+import { EvaluationObj2 } from './EvaluationObj2';
+import { EvaluationObj3 } from './EvaluationObj3';
+import { EvaluationObj4 } from './EvaluationObj4';
+import { EvaluationObj5 } from './EvaluationObj5';
+import { EvaluationObj6 } from './EvaluationObj6';
+import { useDispatch, useSelector } from "react-redux"
+import { onIds, fillList } from '../store/ui/uiSlice';
+import { animateScroll as scroll} from 'react-scroll';
+import { Completed } from './Completed';
 
 const goals = {
     objetivo1: "Perder peso",
@@ -16,9 +25,24 @@ const goals = {
 }
 
 export const Evaluation = () => {
+
+    // const dispatch = useDispatch();
     
     //almacena la lista de objetivos seleccionados
     const [list, setList] = useState([])
+
+    const [finish, setFinish] = useState(false)
+
+    const [ids, setIds] = useState([])
+
+    const [next, setNext] = useState(0)
+
+    const [index1, setIndex1] = useState(false)
+    const [index2, setIndex2] = useState(false)
+    const [index3, setIndex3] = useState(false)
+    const [index4, setIndex4] = useState(false)
+    const [index5, setIndex5] = useState(false)
+    const [index6, setIndex6] = useState(false)
     
     //configura el prompt para hacer la petición a la api de openai
     const [prompt, setPrompt] = useState("");
@@ -67,9 +91,14 @@ export const Evaluation = () => {
 
         let filteredList = list.filter(item => item.estado === true );
         
-        setList(filteredList)    
+        setList(filteredList)
+
+        // dispatch(fillList(filteredList));
+
+
+
       
-    }, [goal1, goal2, goal3, goal4, goal5, goal6])
+    }, [goal1, goal2, goal3, goal4, goal5, goal6, index1, index2, index3, index4, index5, index6, finish])
     
     
     const addElements = (item) => {
@@ -100,41 +129,53 @@ export const Evaluation = () => {
     // }
                 
     // requestUser(id)
-    
+    // console.log(list)
+
+    // const scrollDown = (value) => {
+    //     window.scrollTo({
+    //     top: value,
+    //     behavior: 'smooth'
+    // })};
                 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        
-        await healthyApi.post('/chat', { prompt })
-            .then((res) => {
-                setResponse(res.data);
-                
-                let customMessage = `
-                    Soy ${user.genero}, nací el ${user.fecha_nacimiento}. 
-                    Actualmente peso ${user.peso} kg y mido ${user.altura} cm.
-                    Que me recomiendas si tengo como objetivo ${list[0].obj}
-                `
 
-                setPrompt(customMessage);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        scroll.scrollTo(800, 'smooth');
+
+        // dispatch(onIds(filteredId))
+        
+        // await healthyApi.post('/chat', { prompt })
+        //     .then((res) => {
+        //         setResponse(res.data);
+                
+        //         let customMessage = `
+        //             Soy ${user.genero}, nací el ${user.fecha_nacimiento}. 
+        //             Actualmente peso ${user.peso} kg y mido ${user.altura} cm.
+        //             Que me recomiendas si tengo como objetivo ${list[0].obj}
+        //         `
+
+        //         setPrompt(customMessage);
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     });
     }
 
-    // let customMessage = `
-    //     Soy ${user.genero}, nací el ${user.fecha_nacimiento}. 
-    //     Actualmente peso ${user.peso} kg y mido ${user.altura} cm.
-    //     Que me recomiendas si tengo como objetivo
-    // `
+    const handleInputChange = (e) => {
+        // setData({
+        //     ...data,
+        //     [e.target.name]: e.target.value;
+        // })
 
-    // console.log(customMessage);
+    }
+
     // console.log(list)
+    // console.log(finish)
+
 
     return (
         <>
             <Navbar />
-
             <h1 className="font-bold text-center">Mi objetivo es:</h1>
                 
                 <div 
@@ -157,7 +198,7 @@ export const Evaluation = () => {
                                                 setGoal1(updateItem)
                                                 setCount(count + 1)
                                                 addElements(updateItem)
-                                                setPrompt("Que es Youtube?")
+                                                setIndex1(true)
                                                 // setList([...list, updateItem])
 
                                             }
@@ -175,6 +216,7 @@ export const Evaluation = () => {
                                                 setGoal1(updateItem)
                                                 setCount(count - 1)
                                                 removeItem(updateItem.obj)
+                                                setIndex1(false)
                                                 // setList([...list, updateItem])
                                             }
                                         } 
@@ -200,6 +242,7 @@ export const Evaluation = () => {
                                                 setGoal2(updateItem)
                                                 setCount(count + 1)
                                                 addElements(updateItem)
+                                                setIndex2(true)
                                                 // setList([...list, updateItem])
                                             }
                                         } 
@@ -216,6 +259,7 @@ export const Evaluation = () => {
                                                 setGoal2(updateItem)
                                                 setCount(count - 1)
                                                 removeItem(updateItem.obj)
+                                                setIndex2(false)
                                             }
                                         } 
                                         className="button-29 text-2xl font-bold  h-2rem mt-3 text-black-alpha-80 border-black-alpha-80" 
@@ -239,6 +283,7 @@ export const Evaluation = () => {
                                                 setGoal3(updateItem)
                                                 setCount(count + 1)
                                                 addElements(updateItem)
+                                                setIndex3(true)
                                                 // setList([...list, updateItem])
                                             }
                                         } 
@@ -256,6 +301,7 @@ export const Evaluation = () => {
                                                 setGoal3(updateItem)
                                                 setCount(count - 1)
                                                 removeItem(updateItem.obj)
+                                                setIndex3(false)
                                             }
                                         } 
                                         className="button-29 text-2xl font-bold  h-2rem mt-3 text-black-alpha-80 border-black-alpha-80" 
@@ -279,6 +325,7 @@ export const Evaluation = () => {
                                                 setGoal4(updateItem)
                                                 setCount(count + 1)
                                                 addElements(updateItem)
+                                                setIndex4(true)
                                                 // setList([...list, updateItem])
                                             }
                                         } 
@@ -296,6 +343,7 @@ export const Evaluation = () => {
                                                 setGoal4(updateItem)
                                                 setCount(count - 1)
                                                 removeItem(updateItem.obj)
+                                                setIndex4(false)
                                             }
                                         } 
                                         className="button-29 text-2xl font-bold  h-2rem mt-3 text-black-alpha-80 border-black-alpha-80" 
@@ -320,6 +368,7 @@ export const Evaluation = () => {
                                                 setGoal5(updateItem)
                                                 setCount(count + 1)
                                                 addElements(updateItem)
+                                                setIndex5(true)
                                                 // setList([...list, updateItem])
                                             }
                                         } 
@@ -337,6 +386,7 @@ export const Evaluation = () => {
                                             setGoal5(updateItem)
                                             setCount(count - 1)
                                             removeItem(updateItem.obj)
+                                            setIndex5(false)
                                         }
                                     } 
                                     className="button-29 text-2xl font-bold  h-2rem mt-3 text-black-alpha-80 border-black-alpha-80" 
@@ -361,6 +411,7 @@ export const Evaluation = () => {
                                                 setGoal6(updateItem)
                                                 setCount(count + 1)
                                                 addElements(updateItem)
+                                                setIndex6(true)
                                                 // setList([...list, updateItem])
                                             }
                                         } 
@@ -368,7 +419,7 @@ export const Evaluation = () => {
                                     className="button-29 text-2xl font-bold  h-2rem mt-3 text-black-alpha-80" 
                                     role="button">
                                         {goals.objetivo6}
-                                    </button>
+                                </button>
                             :
                                 <button 
                                         onClick={
@@ -377,6 +428,7 @@ export const Evaluation = () => {
                                                 setGoal6(updateItem)
                                                 setCount(count - 1)
                                                 removeItem(updateItem.obj)
+                                                setIndex6(false)
                                             } 
                                         }
                                         className="button-29 text-2xl font-bold h-2rem mt-3 text-black-alpha-80 border-black-alpha-80" 
@@ -392,11 +444,23 @@ export const Evaluation = () => {
                         <button type="submit" className="button-28 text-2xl font-bold w-auto h-2rem" role="button">Siguiente</button>
                     </div>
                     
-                    <div className="flex flex-row justify-content-center mb-3">
+                    {/* <div className="flex flex-row justify-content-center mb-3">
                         <p>{response ? response : "Ask me anything..."}</p>
-                    </div>
+                    </div> */}
         
                 </div>
+
+                
+
+                {index1 === true && <EvaluationObj4 list={list} setList={setList} finish={finish} setFinish={setFinish}/>}
+                {index2 === true && <EvaluationObj5 list={list} setList={setList} finish={finish} setFinish={setFinish}/>}
+                {index4 === true && <EvaluationObj3 list={list} setList={setList} finish={finish} setFinish={setFinish}/>}
+                {index3 === true && <EvaluationObj1 list={list} setList={setList} finish={finish} setFinish={setFinish}/>}
+                {index5 === true && <EvaluationObj6 list={list} setList={setList} finish={finish} setFinish={setFinish}/>}
+                {index6 === true && <EvaluationObj2 list={list} setList={setList} finish={finish} setFinish={setFinish}/>}
+
+
+                {/* {finish === true && <Link to="/completed"><Completed /></Link>} */}
 
 
         </>

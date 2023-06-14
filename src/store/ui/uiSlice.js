@@ -3,13 +3,17 @@ import { createSlice } from '@reduxjs/toolkit';
 export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
-        counter: 10
+        listMain: {},
+        ids: []
     },
     reducers: {
-        increment: (state, /* action */ ) => {
-            state.counter += 1;
+        fillList: (state, action) => {
+            state.listMain = action.payload;
         },
+        onIds: (state, action) => {
+            state.ids = action.payload;
+        }
     }
 });
 // Action creators are generated for each case reducer function
-export const { increment } = templateSlice.actions;
+export const { fillList, onIds } = uiSlice.actions;
