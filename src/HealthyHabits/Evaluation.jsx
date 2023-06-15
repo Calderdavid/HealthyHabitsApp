@@ -26,7 +26,7 @@ const goals = {
 
 export const Evaluation = () => {
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     
     //almacena la lista de objetivos seleccionados
     const [list, setList] = useState([])
@@ -93,7 +93,7 @@ export const Evaluation = () => {
         
         setList(filteredList)
 
-        // dispatch(fillList(filteredList));
+        dispatch(fillList(filteredList));
 
 
 
@@ -172,6 +172,7 @@ export const Evaluation = () => {
     // console.log(list)
     // console.log(finish)
 
+    console.log(list)
 
     return (
         <>

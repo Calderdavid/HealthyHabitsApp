@@ -4,8 +4,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import healthyApi from '../api/healthyApi';
 import { useAuthStore } from '../hooks/useAuthStore';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { animateScroll as scroll} from 'react-scroll';
+import { fillList } from '../store/ui/uiSlice';
 
 const goals = {
     objetivo1: "Necesito enfocarme mas en mis tareas diarias",
@@ -17,7 +18,7 @@ export const EvaluationObj2 = ({list, setList, finish, setFinish}) => {
     
     //almacena la lista de objetivos seleccionados
     // const [list, setList] = useState([])
-    
+    const dispatch = useDispatch();
     //configura el prompt para hacer la petición a la api de openai
     const [prompt, setPrompt] = useState("");
     const [response, setResponse] = useState("");
@@ -53,6 +54,7 @@ export const EvaluationObj2 = ({list, setList, finish, setFinish}) => {
         let filteredList = list.filter(item => item.estado === true );
         
         setList(filteredList)    
+        dispatch(fillList(filteredList));
       
     }, [goal1, goal2, goal3])
     

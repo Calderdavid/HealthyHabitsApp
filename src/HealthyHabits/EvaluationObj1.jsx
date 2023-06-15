@@ -11,6 +11,8 @@ import { EvaluationObj4 } from './EvaluationObj4';
 import { EvaluationObj5 } from './EvaluationObj5';
 import { EvaluationObj6 } from './EvaluationObj6';
 import { animateScroll as scroll} from 'react-scroll';
+import { useDispatch } from "react-redux"
+import { fillList } from '../store/ui/uiSlice';
 
 const goals = {
     objetivo1: "Comenzar etapa de volumen con baja cantidad de grasa",
@@ -23,6 +25,7 @@ export const EvaluationObj1 = ({list, setList, finish, setFinish}) => {
     // const { listMain, ids } = useSelector(state => state.ui);
 
     // const [index, setIndex] = useState(0)
+    const dispatch = useDispatch();
 
     // console.log(listMain)
     //almacena la lista de objetivos seleccionados
@@ -62,7 +65,9 @@ export const EvaluationObj1 = ({list, setList, finish, setFinish}) => {
 
         let filteredList = list.filter(item => item.estado === true );
         
-        setList(filteredList)    
+        setList(filteredList)
+        
+        dispatch(fillList(filteredList));    
       
     }, [goal1, goal2, goal3, finish])
     
