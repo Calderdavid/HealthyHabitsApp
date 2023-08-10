@@ -13,6 +13,7 @@ import { EvaluationObj4 } from '../HealthyHabits/EvaluationObj4'
 import { EvaluationObj5 } from '../HealthyHabits/EvaluationObj5'
 import { EvaluationObj6 } from '../HealthyHabits/EvaluationObj6'
 import { Completed } from '../HealthyHabits/Completed'
+import { Chatbot } from '../HealthyHabits/Chatbot'
 
 
 export const AppRouter = () => {
@@ -40,7 +41,7 @@ export const AppRouter = () => {
         <>
             <Routes>
                 {
-                    (status === 'not-authenticated')
+                    (status === 'authenticated')
                     
                     ? (
                         <>
@@ -56,6 +57,7 @@ export const AppRouter = () => {
                             <Route path="/" element={<HomePage/>} />
                             <Route path="/evaluation" element={<Evaluation/>} />
                             <Route path="/completed" element={<Completed />} />
+                            <Route path="/chatbot" element={<Chatbot />} />
                             <Route path="/api" element={<OpenAI/>} />
                             <Route path="/*" element={<Navigate to="/" />} />
                         </>

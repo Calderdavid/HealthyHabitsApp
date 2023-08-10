@@ -3,14 +3,18 @@ import { Navbar } from '../components/Navbar'
 import { useSelector } from 'react-redux';
 import { useAuthStore } from '../hooks/useAuthStore';
 import healthyApi from '../api/healthyApi';
+import { Mypdf } from '../components/Mypdf';
+import { Results } from './Results';
 
 export const Completed = () => {
+
+    const [generatePDF, setGeneratePDF] = useState(false);
     
     const { listMain } = useSelector(state => state.ui);
 
     const { user } = useAuthStore()
 
-    const [response, setResponse] = useState("");
+    const [response, setResponse] = useState([]);
     
     const mensaje = `Soy ${user.genero}, nací el ${user.fecha_nacimiento}. 
     Actualmente peso ${user.peso} kg y mido ${user.altura} cm.
@@ -18,11 +22,14 @@ export const Completed = () => {
     ${listMain[0].obj}, ${listMain[1].obj}, ${listMain[2].obj}.
     
     Los cuales los quiero conseguir de la siguiente forma
-    ${listMain[3].obj}, ${listMain[4].obj}, ${listMain[5].obj}, respectivamente.`
+    ${listMain[3].obj}, ${listMain[4].obj}, ${listMain[5].obj}, respectivamente.
+    
+    Finalmente generame una rutina de entrenamiento que yo pueda seguir continuamente.`
     
     const prompt = [{
         "role": "user",
-        "content": mensaje,    
+        "content": mensaje,   //texto de la evaluacion completa
+        // "content": "Define que es Youtube en 3 lineas",   //Texto de prueba
     }]
     
     const handleSubmit = async(e) => {
@@ -31,7 +38,10 @@ export const Completed = () => {
         
         await healthyApi.post('/chat', {prompt})
             .then((res) => {
-                setResponse(res.data);
+                let newText = res.data.replace(/-/g, '\n\n');
+                setResponse(newText);
+                setGeneratePDF(true);
+                console.log(newText)
             })
             .catch((error) => {
                 console.log(error);
@@ -71,11 +81,15 @@ export const Completed = () => {
 
                     <div  className="flex flex-row justify-content-center mb-3">
                         {/* <Link to="/api"><button type="submit" className="button-28 text-2xl font-bold w-auto h-2rem" role="button">Siguiente</button></Link> */}
-                        <button onClick={handleSubmit} type="submit" className="button-28 text-2xl font-bold h-2rem" role="button">Descargar PDF</button>
+                        <button onClick={handleSubmit} type="submit" className="button-28 text-2xl font-bold h-2rem" role="button">Generar resultado</button>
                     </div>
 
                     <div className="flex flex-row justify-content-center mb-3">
-                        <p className="text-justify">{response ? response : "Ask me anything..."}</p>
+
+                        
+                        {/* {generatePDF === true && <Results data={response}/>} */}
+                        {generatePDF === true && <Mypdf data={response}/>}
+                        {/* <p className="text-justify">{response ? response : "Ask me anything..."}</p> */}
                     </div>
                 </div>  
         </>

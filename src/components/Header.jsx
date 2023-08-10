@@ -1,12 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import { useAuthStore } from '../hooks/useAuthStore';
+import { Button } from 'primereact/button';
+import { Sidebar } from 'primereact/sidebar';
+import { Link, Navigate } from 'react-router-dom';
+import { Chatbot } from '../HealthyHabits/Chatbot';
 
 
 export const Header = () => {
 
   const { startLogout, user } = useAuthStore();
+
+  const [visible, setVisible] = useState(false);
+
 
   return (
     <>
@@ -17,14 +24,25 @@ export const Header = () => {
             boxShadow: "0 10px 6px -6px #777"
           }}
         >
-          <h4 
+          {/* <h4 
             className="ml-6 font-bold text-6xl cursor-pointer" 
             style={{
                 color:'black',
             }}
           >
               {user.nombre}
-          </h4>
+          </h4> */}
+          <div className="ml-6 my-auto cursor-pointer">
+            <Sidebar visible={visible} onHide={() => setVisible(false)} className="w-full md:w-20rem lg:w-30rem">
+              <h2>Menú</h2>
+              <nav>
+                <Link className="ml-2 text-2xl"><li className="text-900">Perfil</li></Link>
+                <Link className="ml-2 text-2xl"><li className="text-900">Noticias</li></Link>
+                <Link to="/chatbot" className="ml-2 text-2xl"><li className="text-900">Asistente virtual</li></Link>
+              </nav>
+            </Sidebar>
+            <Button className="text-900 surface-0 border-transparent" icon="pi pi-bars text-3xl" onClick={() => setVisible(true)}/>
+          </div>
           
 
           <h4 
