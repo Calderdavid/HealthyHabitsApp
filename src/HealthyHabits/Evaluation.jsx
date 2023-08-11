@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { onIds, fillList } from '../store/ui/uiSlice';
 import { animateScroll as scroll} from 'react-scroll';
 import { Completed } from './Completed';
+import { Header } from '../components/Header';
 
 const goals = {
     objetivo1: "Perder peso",
@@ -176,7 +177,7 @@ export const Evaluation = () => {
 
     return (
         <>
-            <Navbar />
+            <Header />
             <h1 className="font-bold text-center">Mi objetivo es:</h1>
                 
                 <div 

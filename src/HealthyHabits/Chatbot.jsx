@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import {
   MainContainer,
   ChatContainer,
@@ -9,6 +9,7 @@ import {
   TypingIndicator,
 } from "@chatscope/chat-ui-kit-react";
 import { Navbar } from '../components/Navbar';
+import { Header } from '../components/Header';
 
 const API_KEY = "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"
 
@@ -101,7 +102,7 @@ export const Chatbot = () => {
 
     return (
         <div className="App">
-            <Navbar />
+            <Header />
             <div style={{position: "relative", height: "85vh", width:"700px", margin:"0 auto", marginTop: "10px"}}>
                 <MainContainer>
                     <ChatContainer>

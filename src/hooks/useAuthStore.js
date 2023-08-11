@@ -24,6 +24,7 @@ export const useAuthStore = () => {
                 {
                     nombre: data.usuario.nombre, 
                     // uid: data.usuario.uid, 
+                    apellido: data.usuario.apellido,
                     id: data.usuario.uid, 
                     correo: data.usuario.correo, 
                     fecha_nacimiento: data.usuario.fecha_nacimiento,

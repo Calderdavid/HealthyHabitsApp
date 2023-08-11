@@ -5,6 +5,7 @@ import { useAuthStore } from '../hooks/useAuthStore';
 import healthyApi from '../api/healthyApi';
 import { Mypdf } from '../components/Mypdf';
 import { Results } from './Results';
+import { Header } from '../components/Header';
 
 export const Completed = () => {
 
@@ -50,7 +51,7 @@ export const Completed = () => {
 
     return (
         <>
-            <Navbar />
+            <Header />
             <h1 className="font-bold text-center">¡Gracias por confiar en nosotros!</h1>
                 
                 <div 
