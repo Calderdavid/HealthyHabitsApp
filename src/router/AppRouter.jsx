@@ -15,6 +15,7 @@ import { EvaluationObj6 } from '../HealthyHabits/EvaluationObj6'
 import { Completed } from '../HealthyHabits/Completed'
 import { Chatbot } from '../HealthyHabits/Chatbot'
 import { Profile } from '../HealthyHabits/Profile'
+import { RoutineCustom } from '../HealthyHabits/RoutineCustom'
 
 
 export const AppRouter = () => {
@@ -60,6 +61,7 @@ export const AppRouter = () => {
                             <Route path="/completed" element={<Completed />} />
                             <Route path="/chatbot" element={<Chatbot />} />
                             <Route path="/profile" element={<Profile />} />
+                            <Route path="/custom" element={<RoutineCustom />} />
                             <Route path="/api" element={<OpenAI/>} />
                             <Route path="/*" element={<Navigate to="/" />} />
                         </>
