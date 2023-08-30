@@ -12,9 +12,6 @@ export const ExerciseCompleted = ({list, setList}) => {
     useEffect(() => {
       
     }, [filteredList])
-    
-    console.log(filteredList)
-    
 
     const header = (
         <img alt="Card" src="https://primefaces.org/cdn/primereact/images/usercard.png" />

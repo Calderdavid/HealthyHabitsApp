@@ -37,7 +37,8 @@ export const Header = () => {
               <h2>Menú</h2>
               <nav>
                 <Link to="/profile" className="ml-2 text-2xl"><li className="text-900">Perfil</li></Link>
-                <Link to="/custom" className="ml-2 text-2xl"><li className="text-900">Crea tu plan</li></Link>
+                <Link to="/custom" className="ml-2 text-2xl"><li className="text-900">Crea tu rutina</li></Link>
+                <Link to="/recipe" className="ml-2 text-2xl"><li className="text-900">Crea tu receta</li></Link>
                 <Link to="/chatbot" className="ml-2 text-2xl"><li className="text-900">Asistente virtual</li></Link>
                 <Link to="/evaluation" className="ml-2 text-2xl"><li className="text-900">Evaluacion</li></Link>
               </nav>
