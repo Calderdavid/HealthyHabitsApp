@@ -2,15 +2,14 @@ import React, {useState, useEffect} from 'react'
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 
-export const Exercises = ({list, setList}) => {
+export const Recipes = ({list, setList}) => {
 
     const [ items, setItems ] = useState(list)
-    
-    
-    const newList = JSON.parse(localStorage.getItem('routineList')) //Lo convierte en objeto
+
+    const newList = JSON.parse(localStorage.getItem('recipeList'))
 
     useEffect(() => {
-        const storedItems = JSON.parse(localStorage.getItem('routineList'));
+        const storedItems = JSON.parse(localStorage.getItem('recipeList'));
         if (storedItems) {
             setItems(storedItems);
             setList(storedItems);
@@ -18,7 +17,7 @@ export const Exercises = ({list, setList}) => {
     }, []);
 
     const updateLocalStorage = (updatedItems) => {
-        localStorage.setItem('routineList', JSON.stringify(updatedItems));
+        localStorage.setItem('recipeList', JSON.stringify(updatedItems));
     }
 
     const handleSaveClick = (index) => {
@@ -58,27 +57,34 @@ export const Exercises = ({list, setList}) => {
         </div>
     );
 
-    
-    console.log(newList)
     return (
         <div className="card flex flex-wrap gap-6 p-2">
-            {
-                !newList 
-                ?
-                    <p>Vacío</p>
-                :
-                newList.map((item, index) => (
-                    <Card 
-                        key={index} title={item.nombre} subTitle="Subtitle" 
-                        footer={footer(index)} header={header} className="md:w-25rem"
-                        // onClick={() => handleCancelClick(index)}
-                    >
-                        <span className="m-0">
-                            {`${item.series} series / ${item.reps} repeticiones`}
-                        </span>
-                    </Card>
-                ))
-            }
+        {
+            !newList 
+            ?
+                <p>Vacío</p>
+            :
+            newList.map((item, index) => (
+                <Card 
+                    key={index} title={item.nombre} 
+                    footer={footer(index)} header={header} className="md:w-25rem"
+                    // onClick={() => handleCancelClick(index)}
+                >
+                    <span className="m-0">
+                        {`${item.raciones} raciones o porciones`}
+                    </span>
+
+                    <h3 className="mt-2">Ingredientes</h3>
+                    <ul>
+                        {
+                            item.ingredientes.map(( i, index) => (
+                                <li key={index}>- {i.ingredient}</li>
+                            ))
+                        }
+                    </ul>
+                </Card>
+            ))
+        }
 
         </div>
     )

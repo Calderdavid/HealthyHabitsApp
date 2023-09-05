@@ -15,7 +15,7 @@ export const RoutineCustom = () => {
 
   const [value, setValue] = useState('');
 
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
   const items = [
       {label: 'Crea tu rutina', icon: 'pi pi-fw pi-plus'},
       {label: 'Lista de ejercicios', icon: 'pi pi-fw pi-list'},

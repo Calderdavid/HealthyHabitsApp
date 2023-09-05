@@ -2,10 +2,9 @@ import React, { useEffect } from 'react'
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 
+export const RecipeCompleted = () => {
 
-export const ExerciseCompleted = ({list, setList}) => {
-    
-    const newList = JSON.parse(localStorage.getItem('routineList')) //Lo convierte en objeto
+    const newList = JSON.parse(localStorage.getItem('recipeList')) //Lo convierte en objeto
 
     const filteredList = newList ? newList.filter(item => item.estado !== false) : [];
 
@@ -32,7 +31,8 @@ export const ExerciseCompleted = ({list, setList}) => {
             />
         </div>
     );
-    
+
+
     return (
         <div className="card flex flex-wrap gap-6 p-2">
             {
@@ -42,17 +42,25 @@ export const ExerciseCompleted = ({list, setList}) => {
                 :
                 filteredList.map((item, index) => (
                     <Card 
-                        key={index} title={item.nombre} subTitle="Subtitle" 
+                        key={index} title={item.nombre} 
                         footer={footer(index)} header={header} className="md:w-25rem"
                         // onClick={() => handleCancelClick(index)}
                     >
                         <span className="m-0">
-                            {`${item.series} series / ${item.reps} repeticiones`}
+                            {`${item.raciones} raciones o porciones`}
                         </span>
+
+                        <h3 className="mt-2">Ingredientes</h3>
+                        <ul>
+                            {
+                                item.ingredientes.map(( i, index) => (
+                                    <li key={index}>- {i.ingredient}</li>
+                                ))
+                            }
+                        </ul>
                     </Card>
                 ))
             }
-
         </div>
     )
 }
