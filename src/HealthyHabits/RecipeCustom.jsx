@@ -6,6 +6,7 @@ import { FormRoutine } from '../components/FormRoutine';
 import { FormRecipe } from '../components/FormRecipe';
 import { Recipes } from '../components/Recipes';
 import { RecipeCompleted } from '../components/RecipeCompleted';
+import { RecipeApi } from '../components/RecipeApi';
 // import { FormRoutine } from '../components/FormRoutine';
 // import { Exercises } from '../components/Exercises';
 // import { ExerciseCompleted } from '../components/ExerciseCompleted';
@@ -82,6 +83,7 @@ export const RecipeCustom = () => {
         {activeIndex === 0 && <FormRecipe list={list} setList={setList}/>}
         {activeIndex === 2 && <Recipes list={list} setList={setList}/>}
         {activeIndex === 3 && <RecipeCompleted list={list} setList={setList}/>}
+        {activeIndex === 1 && <RecipeApi list={list} setList={setList}/>}
       </div>
     </>
   )

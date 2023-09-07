@@ -16,7 +16,7 @@ export const FormRecipe = ({list, setList}) => {
 
   const RecipeSubmit = (e) => {
 
-    console.log('AAA')
+    // console.log('AAA')
       e.preventDefault();
 
       let recipe = {

@@ -36,6 +36,8 @@ export const Completed = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
         
+        localStorage.setItem("Objetivos", JSON.stringify(listMain))
+        localStorage.setItem("Biografia", JSON.stringify(mensaje))
         
         await healthyApi.post('/chat', {prompt})
             .then((res) => {
