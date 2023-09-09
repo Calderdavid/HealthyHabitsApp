@@ -18,6 +18,7 @@ export const Exercises = ({list, setList}) => {
     }, []);
 
     const updateLocalStorage = (updatedItems) => {
+        setList(updatedItems);
         localStorage.setItem('routineList', JSON.stringify(updatedItems));
     }
 
@@ -69,7 +70,7 @@ export const Exercises = ({list, setList}) => {
                 :
                 newList.map((item, index) => (
                     <Card 
-                        key={index} title={item.nombre} subTitle="Subtitle" 
+                        key={index} title={item.nombre}
                         footer={footer(index)} header={header} className="md:w-25rem"
                         // onClick={() => handleCancelClick(index)}
                     >

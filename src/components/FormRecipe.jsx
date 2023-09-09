@@ -8,11 +8,16 @@ import { Button } from 'primereact/button';
 export const FormRecipe = ({list, setList}) => {
 
   const [name, setName] = useState('');
-  const [porcion, setPorcion] = useState(0);
+  const [porcion, setPorcion] = useState("");
 
   const [ingredient, setIngredient] = useState("");
   const [listIngredients, setListIngredients] = useState([]); 
+
+  const [quantity, setQuantity] = useState("")
   
+  const clearTable = () => {
+    setListIngredients([]);
+  }
 
   const RecipeSubmit = (e) => {
 
@@ -30,23 +35,37 @@ export const FormRecipe = ({list, setList}) => {
       setList([ ...list, recipe ]);
       localStorage.setItem('recipeList', JSON.stringify(newList));
 
+      clearTable()
+      setName("")
+      setPorcion("")
+
   }
 
   const handleKeyDown = (e) => {
     let  newIngredient = {
-      ingredient: e.target.value
+      ingredient: e.target.value,
+      quantity: quantity
     };
+    console.log(newIngredient)
     if (e.key === 'Enter'){
       setListIngredients([...listIngredients, newIngredient])      
     }
   }
 
+  const handleIngredients = () => {
+    let  newIngredient = {
+      ingredient: ingredient,
+      quantity: `${quantity} gramos`
+    };
+    setListIngredients([...listIngredients, newIngredient])   
+    
+    setIngredient("")
+    setQuantity("")
+  }
+ 
+
   const handleChange = (newIngredient) => {
     setIngredient(newIngredient);
-  }
-
-  const clearTable = () => {
-    setListIngredients([]);
   }
 
   const header = (
@@ -71,7 +90,9 @@ export const FormRecipe = ({list, setList}) => {
 
           <div className="flex flex-column gap-2">
               <label htmlFor="nombre del ejercicio">Ingredientes</label>
-              <InputText className=" p-3 w-5" value={ingredient} onKeyDown={handleKeyDown} onChange={(e) => handleChange(e.target.value)} />
+              <InputText placeholder="Nombre del ingrediente" className=" p-3 w-5" value={ingredient} onKeyDown={handleKeyDown} onChange={(e) => setIngredient(e.target.value)} />
+              <InputText placeholder="Cantidad en gramos" className=" p-3 w-5" value={quantity} onKeyDown={handleKeyDown} onChange={(e) => setQuantity(e.target.value)} />
+              <button onClick={handleIngredients} type="button" className="button-28 text-3xl font-bold w-5" role="button">Añadir ingrediente</button>
           </div>
 
           {
@@ -79,8 +100,9 @@ export const FormRecipe = ({list, setList}) => {
             ? 
               <span className="text-xs">No has añadido ningún ingrediente todavía</span>
             :
-              <DataTable className="w-6" value={listIngredients} header={header} tableStyle={{ minWidth: '50rem' }}>
+              <DataTable className="w-10" value={listIngredients} header={header} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="ingredient" header="Ingredientes"></Column>
+                <Column field="quantity" header="Cantidad (gr)"></Column>
               </DataTable>
           }    
               
