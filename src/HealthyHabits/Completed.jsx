@@ -6,6 +6,8 @@ import healthyApi from '../api/healthyApi';
 import { Mypdf } from '../components/Mypdf';
 import { Results } from './Results';
 import { Header } from '../components/Header';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+
 
 export const Completed = () => {
 
@@ -32,9 +34,34 @@ export const Completed = () => {
         "content": mensaje,   //texto de la evaluacion completa
         // "content": "Define que es Youtube en 3 lineas",   //Texto de prueba
     }]
+
+    
     
     const handleSubmit = async(e) => {
         e.preventDefault();
+        
+        let timerInterval
+        Swal.fire({
+          title: 'Estamos generando el resultado de tu evaluación',
+          html: 'Por favor, espera unos segundos',
+          timer: 7000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+          }
+        })
         
         localStorage.setItem("Objetivos", JSON.stringify(listMain))
         localStorage.setItem("Biografia", JSON.stringify(mensaje))

@@ -20,15 +20,29 @@ export const RecipeCompleted = () => {
 
     const { user } = useAuthStore()
 
+    const [grasas_totales, setGrasas_totales] = useState("");
+    const [carbohidratos_totales, setCarbohidratos_totales] = useState("");
+    const [proteinas, setProteinas] = useState("");
+
+    
+
+    // const {grasas_totales, carbohidratos_totales, proteinas, calorias_totales } = JSON.parse(localStorage.getItem('nutritionData'));
+
     useEffect(() => {
-        if(response) {
+
+        if (response) {
+
+
             const documentStyle = getComputedStyle(document.documentElement);
+    
+            const {grasas_totales, carbohidratos_totales, proteinas, calorias_totales } = JSON.parse(localStorage.getItem('nutritionData'));
             const data = {
-                labels: ['Grasas totales','Carbohidratos totales','Proteínas'],
+                labels: ['Grasas totales (g)','Carbohidratos totales (g)','Proteínas (g)'],
                 datasets: [
                     {
                         //[grasas_totales, carbohidratos_totales, proteinas, calorias_totales]
-                        data: [response.grasas_totales, response.carbohidratos_totales, response.proteinas],
+                        // data: [response.grasas_totales, response.carbohidratos_totales, response.proteinas],
+                        data: [grasas_totales, carbohidratos_totales, proteinas],
                         backgroundColor: [
                             documentStyle.getPropertyValue('--blue-500'), 
                             documentStyle.getPropertyValue('--yellow-500'), 
@@ -122,6 +136,8 @@ export const RecipeCompleted = () => {
             const test = getData(res.data);
             // console.log(test)
             setResponse(test)
+            console.log(test)
+            localStorage.setItem('nutritionData', JSON.stringify(test));
         })
         .catch((error) => {
             console.log(error);
@@ -198,20 +214,26 @@ export const RecipeCompleted = () => {
                         </ul>
                         <h3 className="mt-2">Valores nutricionales de tu receta</h3>
                         <p>
-                            {
+                            {/* {
                                 response ? (
                                     `Calorías totales: ${response.calorias_totales}`
                                 )
                                 :
                                 '...'
-                            }
+                            } */}
+
                         </p>
-                        <div className="card flex mt-2">
-                            <Chart type="pie" data={chartData} options={chartOptions} className=" md:w-30rem" />
-                        </div>
                     </Card>
                 ))
             }
+            <div className="card flex flex-column mt-2">
+                <p className="mx-auto">
+                    {/* {
+                        `Calorías totales: ${calorias_totales}`
+                    } */}
+                </p>
+                <Chart type="pie" data={chartData} options={chartOptions} className=" md:w-30rem" />
+            </div>
             
         </div>
     )

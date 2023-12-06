@@ -3,6 +3,7 @@ import { InputText } from "primereact/inputtext";
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 
 export const FormRecipe = ({list, setList}) => {
@@ -23,6 +24,12 @@ export const FormRecipe = ({list, setList}) => {
 
     // console.log('AAA')
       e.preventDefault();
+
+      Swal.fire(
+        'Excelente!',
+        'Ya hemos añadido tu receta a la lista!',
+        'success'
+      )
 
       let recipe = {
           "nombre": name,

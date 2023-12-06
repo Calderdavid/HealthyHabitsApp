@@ -6,8 +6,9 @@ import { Calendar } from 'primereact/calendar';
 import { InputNumber } from 'primereact/inputnumber';
 import { useForm } from '../hooks/useForm'
 import { useAuthStore } from '../hooks/useAuthStore';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 
 const RegisterFormFields = {
@@ -59,6 +60,12 @@ export const Register = () => {
 
     const registerSubmit = (event) => {
         event.preventDefault();
+
+        Swal.fire(
+            'Excelente!',
+            'Ya estas registrado en Healthy Habits!',
+            'success'
+        )
 
         const edad = getEdad(birthday); //return edad (valor entero)
 

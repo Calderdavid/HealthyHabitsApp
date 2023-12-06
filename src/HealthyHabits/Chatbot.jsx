@@ -19,7 +19,7 @@ export const Chatbot = () => {
 
     const [messages, setMessages] = useState([
         {
-            message: "Hello, I am ChatGPT!",
+            message: "Hola, yo soy tu asistente virtual!",
             sentTime: "just now",
             sender: "ChatGPT",
         }
@@ -107,7 +107,7 @@ export const Chatbot = () => {
                 <MainContainer>
                     <ChatContainer>
                         <MessageList
-                            typingIndicator={typing ? <TypingIndicator content="ChatGPT is typing"/> : null}
+                            typingIndicator={typing ? <TypingIndicator content="Escribiendo"/> : null}
                         >
                             {messages.map((message, i) => {
                                 return <Message key={i} model={message} />

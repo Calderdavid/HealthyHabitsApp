@@ -24,6 +24,13 @@ export const Login = () => {
     
     const loginSubmit = (event) => {
         event.preventDefault();
+
+        Swal.fire(
+            'Excelente!',
+            'Bienvenido a Healthy Habits!',
+            'success'
+        )
+
         startLogin({email: loginEmail, password: loginPassword})
     }
 

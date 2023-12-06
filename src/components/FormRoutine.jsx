@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { InputText } from "primereact/inputtext";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 export const FormRoutine = ({list, setList}) => {
 
@@ -13,6 +14,13 @@ export const FormRoutine = ({list, setList}) => {
 
     const RoutineSubmit = (e) => {
         e.preventDefault();
+
+        Swal.fire(
+            'Excelente!',
+            'Ya hemos añadido tu rutina a la lista!',
+            'success'
+          )
+
         let routine = {
             "nombre": name,
             "series": series,

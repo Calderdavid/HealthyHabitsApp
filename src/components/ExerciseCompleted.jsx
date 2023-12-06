@@ -134,7 +134,7 @@ export const ExerciseCompleted = ({list, setList}) => {
     }
 
     const handleSaveClick = (index, item) => {
-        AskToApi(item)
+        // AskToApi(item)
     }
 
 
@@ -144,11 +144,11 @@ export const ExerciseCompleted = ({list, setList}) => {
 
     const footer = (index, item) => (
         <div className="flex flex-wrap justify-content-end gap-2">
-            <Button
-                label="Estimar calorías"
+            {/* <Button
+                label="Save"
                 icon="pi pi-check"
                 onClick={() => handleSaveClick(index, item)}
-            />
+            /> */}
             {/* <Button
                 label="Cancel"
                 icon="pi pi-times"
@@ -180,9 +180,9 @@ export const ExerciseCompleted = ({list, setList}) => {
                         <span>
                             {`Peso por repetición: ${item.peso} Kg`}
                         </span>
-                        <div className="card flex justify-content-center">
+                        {/* <div className="card flex justify-content-center">
                             <Chart type="polarArea" data={chartData} options={chartOptions} style={{ position: 'relative', width: '80%' }} />
-                        </div>
+                        </div> */}
                     </Card>
                 ))
             }

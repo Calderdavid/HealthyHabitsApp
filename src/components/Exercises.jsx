@@ -46,12 +46,12 @@ export const Exercises = ({list, setList}) => {
     const footer = (index) => (
         <div className="flex flex-wrap justify-content-end gap-2">
             <Button 
-                label="Save" 
+                label="Rutina realizada" 
                 icon="pi pi-check" 
                 onClick={() => handleSaveClick(index)}
             />
             <Button 
-                label="Cancel" 
+                label="Eliminar rutina" 
                 icon="pi pi-times" 
                 className="p-button-outlined p-button-secondary" 
                 onClick={() => handleCancelClick(index)}
@@ -74,8 +74,14 @@ export const Exercises = ({list, setList}) => {
                         footer={footer(index)} header={header} className="md:w-25rem"
                         // onClick={() => handleCancelClick(index)}
                     >
+                        <h3>Cantidad de series y repeticiones</h3>
                         <span className="m-0">
                             {`${item.series} series / ${item.reps} repeticiones`}
+                        </span>
+
+                        <h3 className="mt-2">Peso</h3>
+                        <span>
+                            {`Peso por repetición: ${item.peso} Kg`}
                         </span>
                     </Card>
                 ))

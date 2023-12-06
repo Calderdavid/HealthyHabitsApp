@@ -51,12 +51,12 @@ export const Recipes = ({list, setList}) => {
     const footer = (index) => (
         <div className="flex flex-wrap justify-content-end gap-2">
             <Button 
-                label="Save" 
+                label="Receta realizada" 
                 icon="pi pi-check" 
                 onClick={() => handleSaveClick(index)}
             />
             <Button 
-                label="Cancel" 
+                label="Eliminar receta" 
                 icon="pi pi-times" 
                 className="p-button-outlined p-button-secondary" 
                 onClick={() => handleCancelClick(index)}
